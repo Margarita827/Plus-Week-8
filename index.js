@@ -56,7 +56,38 @@ function handleSearchSubmit(event) {
   changeCity(searchInput.value);
 }
 
+function displayForecast() {
+  let nextDays = ["Tue", "Wed", "Thu", "Fri", "Sat"];
+  let forecastHtml = "";
+
+  nextDays.forEach(function (day) {
+    forecastHtml =
+      forecastHtml +
+      `
+      <div class="row"> 
+    <div class="date-week">
+      ${day}</div>
+      </div>
+      <div class="date-icon">
+        <img
+          src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
+          alt=""
+          width="30"
+        />
+      </div>
+      <div class="date-temp">
+        <span class="temp-max"> 18º </span>
+        <span class="temp-min"> 12º </span>
+    </div>
+    `;
+  });
+
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = forecastHtml;
+}
+
 let searchElement = document.querySelector("#search-form");
 searchElement.addEventListener("submit", handleSearchSubmit);
 
 changeCity("Brighton");
+displayForecast();
