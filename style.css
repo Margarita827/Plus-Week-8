@@ -78,6 +78,15 @@ a {
   font-weight: bold;
 }
 
+.date-week {
+  font-size: 12px;
+}
+
+
+.date-temp {
+  font-size: 12px;
+}
+
 main {
   padding: 30px 0;
 }
