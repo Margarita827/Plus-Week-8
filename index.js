@@ -66,15 +66,14 @@ function getForecast(city) {
 function displayForecast(response) {
   console.log(response.data);
 
-  let nextDays = ["Tue", "Wed", "Thu", "Fri", "Sat"];
   let forecastHtml = "";
 
-  nextDays.forEach(function (day) {
+  response.data.daily.forEach(function (day) {
     forecastHtml =
       forecastHtml +
       `
     <div class="row"> 
-    <div class="date-week">${day}</div>
+    <div class="date-week"></div>
      
       <div class="date-icon">
         <img
@@ -84,8 +83,8 @@ function displayForecast(response) {
         />
       </div>
       <div class="date-temp">
-        <span class="temp-max"> 18º </span>
-        <span class="temp-min"> 12º </span>
+        <span class="temp-max">${Math.round(day.temperature.maximum)}º</span>
+        <span class="temp-min">${Math.round(day.temperature.minimum)}º</span>
     </div> 
      </div>
     `;
