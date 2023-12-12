@@ -64,7 +64,7 @@ function displayForecast() {
     forecastHtml =
       forecastHtml +
       `
-      <div class="row"> 
+    <div class="row"> 
     <div class="date-week">
       ${day}</div>
       </div>
@@ -78,7 +78,7 @@ function displayForecast() {
       <div class="date-temp">
         <span class="temp-max"> 18º </span>
         <span class="temp-min"> 12º </span>
-    </div>
+    </div> 
     `;
   });
 
