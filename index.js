@@ -9,14 +9,15 @@ function updateWeather(response) {
   let date = new Date(response.data.time * 1000);
   let icon = document.querySelector("#icon");
 
-  icon.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-icon" />`;
-
   cityElement.innerHTML = response.data.city;
   timeElement.innerHTML = formatDate(date);
   descriptionElement.innerHTML = response.data.condition.description;
   humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
   windElement.innerHTML = `${response.data.wind.speed}km/h`;
   temperatureElement.innerHTML = Math.round(temperature);
+  icon.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-icon" />`;
+
+  getForecast(response.data.city);
 }
 
 function formatDate(date) {
@@ -46,7 +47,7 @@ function formatDate(date) {
 
 function changeCity(city) {
   let apiKey = "o84c2a432ct7ef09733306be2507e42f";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
   axios.get(apiUrl).then(updateWeather);
 }
 
@@ -56,7 +57,15 @@ function handleSearchSubmit(event) {
   changeCity(searchInput.value);
 }
 
-function displayForecast() {
+function getForecast(city) {
+  let apiKey = "o84c2a432ct7ef09733306be2507e42f";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+  axios(apiUrl).then(displayForecast);
+}
+
+function displayForecast(response) {
+  console.log(response.data);
+
   let nextDays = ["Tue", "Wed", "Thu", "Fri", "Sat"];
   let forecastHtml = "";
 
@@ -65,9 +74,8 @@ function displayForecast() {
       forecastHtml +
       `
     <div class="row"> 
-    <div class="date-week">
-      ${day}</div>
-      </div>
+    <div class="date-week">${day}</div>
+     
       <div class="date-icon">
         <img
           src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
@@ -79,6 +87,7 @@ function displayForecast() {
         <span class="temp-max"> 18º </span>
         <span class="temp-min"> 12º </span>
     </div> 
+     </div>
     `;
   });
 
@@ -90,4 +99,3 @@ let searchElement = document.querySelector("#search-form");
 searchElement.addEventListener("submit", handleSearchSubmit);
 
 changeCity("Brighton");
-displayForecast();

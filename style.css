@@ -78,6 +78,11 @@ a {
   font-weight: bold;
 }
 
+.weather-forecast {
+  display: flex;
+  justify-content: space-between;
+}
+
 .date-week {
   font-size: 14px;
   opacity: 0.6;
